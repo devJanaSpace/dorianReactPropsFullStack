@@ -7,7 +7,13 @@ const InventoryList=( props )=>{
     return(
         <div>
             <h2>InventoryList</h2>
-            <p>props: { JSON.stringify( props ) }</p>
+            {
+                props.items.map( 
+                    thisItem =>(
+                        <InventoryItem item={ thisItem } getItems={ props.getItems }/>
+                    )
+                )
+            }
         </div>
     )
 }

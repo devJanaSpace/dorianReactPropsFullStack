@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const AddItem=( props )=>{
     const [ item, setItem ] = useState( {} );
@@ -16,6 +17,18 @@ const AddItem=( props )=>{
                 color: color
             }
         )
+        // add item (POST)
+        axios.post( '/items', {
+            description: description,
+            size: size,
+            color: color
+        } ).then( ( response )=>{
+            console.log( response.data );
+            props.getItems();
+        }).catch( ( err )=>{
+            console.log( err );
+            alert( 'error adding item to server' );
+        })
     }
     const colorChange = (event) =>{
         console.log( 'in colorChange:', event.target.value ); 
